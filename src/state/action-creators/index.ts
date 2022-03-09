@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
+import { Dispatch } from 'redux';
 
-// const URL = 'https://registry.npmjs.org/-/v1/search'
+const URL = 'https://registry.npmjs.org/-/v1/search';
 
 export const searchRepositories = (term: string) => {
-   return async (dispatch: any) => {
+   return async (dispatch: Dispatch<Action>) => {
       dispatch({ type: ActionType.SEARCH_REPOSITORIES });
 
       try {
@@ -26,7 +27,7 @@ export const searchRepositories = (term: string) => {
       } catch (err) {
          dispatch({
             type: ActionType.SEARCH_REPOSITORIES_ERROR,
-            payload: err,
+            payload: err.message,
          });
       }
    };
